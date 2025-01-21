@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "462cb46cfb28d0dc078a3a6349f8edf5"
-application_url = "https://exists-pee-unauthorized-threats.trycloudflare.com"
+application_url = "https://ou-xhtml-walter-pond.trycloudflare.com"
 embedded = true
 name = "module-a"
 handle = "module-a"
@@ -15,9 +15,9 @@ scopes = ""
 
 [auth]
 redirect_urls = [
-  "https://exists-pee-unauthorized-threats.trycloudflare.com/auth/callback",
-  "https://exists-pee-unauthorized-threats.trycloudflare.com/auth/shopify/callback",
-  "https://exists-pee-unauthorized-threats.trycloudflare.com/api/auth/callback"
+  "https://ou-xhtml-walter-pond.trycloudflare.com/auth/callback",
+  "https://ou-xhtml-walter-pond.trycloudflare.com/auth/shopify/callback",
+  "https://ou-xhtml-walter-pond.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]
