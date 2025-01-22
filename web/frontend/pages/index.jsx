@@ -1,5 +1,6 @@
 import {
   Card,
+  Spinner,
   Page,
   Layout,
   TextContainer,
@@ -16,12 +17,15 @@ import { useLocation } from 'react-router-dom';
 import { trophyImage } from "../assets";
 import { ProductsCard } from "../components"; 
 import { useEffect, useState } from "react";
+import { trusted } from "mongoose";
 const APIServ = new APIServicess();
 
 
 export default function HomePage() {
+  const [languageList, setLanguageList] = useState([]);
   const location = useLocation();
   const [welcomeScreen, setWelcomeScreen] = useState(true);
+  const [loader,setLoader] = useState(true);
   const [shopUrl, setShopUrl] = useState('');
 
 
@@ -56,9 +60,14 @@ export default function HomePage() {
       const resp = await APIServ.getPartnerInfoData();
       
       if(resp?.status && resp?.data){
-        console.log("partner info---",resp);
-
+        setLoader(false)
         setWelcomeScreen(false)
+      }
+      else{
+        setLoader(false)
+
+        setWelcomeScreen(true)
+
       }
 
     
@@ -66,7 +75,6 @@ export default function HomePage() {
   const { t, i18n } = useTranslation();
   
 
-  const [languageList, setLanguageList] = useState([]);
   const languageListInfo = async () => {
     try {
       const reqBody = { limit: 10, offset: 0 };
@@ -106,12 +114,16 @@ export default function HomePage() {
     }
   };
   // const { t } = useTranslation();
+if(loader){
+  return (<Spinner></Spinner>)
+}
+
   return (
 
     <Page fullWidth>
       {
       welcomeScreen ? 
-         <Welcome createPartnerInfo={createPartnerInfo} languageList={languageList}  /> 
+         <Welcome createPartnerInfo={createPartnerInfo} languageList={languageList}  loader={loader} /> 
       :
         <div style={{ width: "100%", margin: "auto", maxWidth: "950px" }}>Hello {shopUrl}</div>
 }

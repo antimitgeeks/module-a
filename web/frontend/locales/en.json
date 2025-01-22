@@ -23,7 +23,7 @@
     "welcomeButtonText" : "Get Started"
 },
   "NavigationMenu": {
-    "pageName": "Page name"
+    "setting": "setting"
   },
   "NotFound": {
     "description": "Check the URL and try again, or use the search bar to find what you need.",

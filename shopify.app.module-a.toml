@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "462cb46cfb28d0dc078a3a6349f8edf5"
-application_url = "https://review-hobbies-uzbekistan-nikon.trycloudflare.com"
+application_url = "https://temple-advertise-sport-reading.trycloudflare.com"
 embedded = true
 name = "module-a"
 handle = "module-a"
@@ -15,9 +15,9 @@ scopes = ""
 
 [auth]
 redirect_urls = [
-  "https://review-hobbies-uzbekistan-nikon.trycloudflare.com/auth/callback",
-  "https://review-hobbies-uzbekistan-nikon.trycloudflare.com/auth/shopify/callback",
-  "https://review-hobbies-uzbekistan-nikon.trycloudflare.com/api/auth/callback"
+  "https://temple-advertise-sport-reading.trycloudflare.com/auth/callback",
+  "https://temple-advertise-sport-reading.trycloudflare.com/auth/shopify/callback",
+  "https://temple-advertise-sport-reading.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]
