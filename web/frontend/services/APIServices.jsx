@@ -1,5 +1,5 @@
 export default class APIServices {
-     baseUrl='https://adc9-137-97-249-58.ngrok-free.app/external';
+     baseUrl='https://b927-137-97-249-58.ngrok-free.app/external';
     //Get Partner Info
     async getPartnerInfoData() {
         const response = await fetch(`${this.baseUrl}/api/partner/info?shop=quickstart-1add1160.myshopify.com`, {
