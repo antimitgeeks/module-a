@@ -1,5 +1,4 @@
 export default class APIServices {
-     baseUrl='https://b927-137-97-249-58.ngrok-free.app/external';
     //Get Partner Info
     async getPartnerInfoData() {
         const response = await fetch(`/api/partner/info?shop=quickstart-1add1160.myshopify.com`, {
@@ -52,5 +51,25 @@ export default class APIServices {
     }
 
     //Cancel active plan
+    async getExtensions() {
+        const response = await fetch(`/api/partner/page-previewing`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        const result = await response.json();
+        return result;
+    }
+    async getSettings() {
+        const response = await fetch(`/api/partner/settings`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        const result = await response.json();
+        return result;
+    }
 
 }

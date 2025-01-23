@@ -3,6 +3,7 @@ const Languages = require('../../models/languages.model.js');
 const AppSettings = require('../../models/appSettings.model.js');
 const SetupGuides = require('../../models/setupGuides.model.js');
 const { shopify } = require("../../../shopify.js");
+const PagePreviewing = require('../../models/pagePreviewing.model.js');
 const PLAN = {
     FREE_AMOUNT: 0,
     FREE_NAME: 'essential',
@@ -184,12 +185,78 @@ exports.getPartnerInfo=async (req,res)=>{
      
     // res.status(200).send({ count: "/api/partner/info" });
     const details = await Partners.findOne({ _id: req.currentPartnerInfo?._id}).populate('languageId');
-    data= {
+    result= {
         status: true,
         message: `Partner info fetched`,
-        data: details
+        result: details
     }
-    res.status(200).send(data);
+    res.status(200).send(result);
     
 }
+exports.pagePreviewing=async (partnerId,session)=>{
+    const pagePreviewingDetails = await PagePreviewing.findOne({ partnerId });
+    // default create details if not exist
+    if (!pagePreviewingDetails) {
+        const client = new shopify.api.clients.Graphql({ session });
+        const query = `query checkoutProfiles {
+                        checkoutProfiles(first:1,query:"is_published:true") {
+                            nodes {
+                            id
+                            isPublished
+                            }
+                        }
+                        }
+                    `
+        // Send the request
+        const data = await client.request(query, {
+            variables: {},
+            headers: { myHeader: '1' },
+            retries: 2
+        });
+
+        const checkoutProfileId = data?.data?.checkoutProfiles?.nodes[0]?.id;
+        const id = checkoutProfileId ? checkoutProfileId.split('/').pop() : null;
+
+        const details = await PagePreviewing.create({
+            partnerId: partnerId,
+            thankyouPage: {
+                name: "Thankyou Page",
+                isAdded: false,
+            },
+            orderStatusPage: {
+                name: "Order Status Page",
+                isAdded: false,
+            },
+            upSellThankyouPage: {
+                name: "Up-Sell Thankyou Page",
+                isAdded: false,
+            },
+            upSellOrderStatus: {
+                name: "Up-Sell Order Status Page",
+                isAdded: false,
+            },
+            checkoutPageId: id
+        })
+        return {
+            status: true,
+            message: `Partner page previewing Fetched`,
+            data: details
+        }
+    }
+    return {
+        status: true,
+        message: `Partner page previewing fetched`,
+        result: pagePreviewingDetails
+    }
+}
 // Export the Router
+
+exports.settings=async (partnerId, session,details,res)=>{
+    const appSettings = await AppSettings.findOneAndUpdate({ partnerId: partnerId }, details, { upsert: true, new: true })
+    return  {
+        status: true,
+        message: `Partner settings updated`,
+        result: appSettings
+    }
+
+}

@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "462cb46cfb28d0dc078a3a6349f8edf5"
-application_url = "https://supporters-appears-stopping-essential.trycloudflare.com"
+application_url = "https://me-adventure-gender-sat.trycloudflare.com"
 embedded = true
 name = "module-a"
 handle = "module-a"
@@ -15,9 +15,9 @@ scopes = ""
 
 [auth]
 redirect_urls = [
-  "https://supporters-appears-stopping-essential.trycloudflare.com/auth/callback",
-  "https://supporters-appears-stopping-essential.trycloudflare.com/auth/shopify/callback",
-  "https://supporters-appears-stopping-essential.trycloudflare.com/api/auth/callback"
+  "https://me-adventure-gender-sat.trycloudflare.com/auth/callback",
+  "https://me-adventure-gender-sat.trycloudflare.com/auth/shopify/callback",
+  "https://me-adventure-gender-sat.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]

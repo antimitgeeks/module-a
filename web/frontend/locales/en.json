@@ -22,8 +22,34 @@
     "welcomeLangText" : "Select your Language",
     "welcomeButtonText" : "Get Started"
 },
+
   "NavigationMenu": {
     "setting": "setting"
+  },
+  "Setting": {
+    "pageTitle": "App Settings",
+    "sectionTitle": "Editing Window Settings",
+    "boxOneTitle": "Customize Order Editing Preferences",
+    "boxOneDesc": "Define editing timeframes and details customers can change.",
+    "boxTwoTitle": "Manage Order Cancellations",
+    "boxTwoDesc": "Set refund rules and manage customer cancellations efficiently.",
+    "boxThreeTitle": "Post-Purchase Upsell",
+    "boxThreeDesc": "Boost sales by offering personalized product recommendations and discounts after checkout.",
+    "showWidget": "Show Widget Preview",
+    "plans": "Plans",
+    "guides": "Guides",
+    "preview": "Preview",
+    "toastMassage": "Changes Saved",
+    "constctInformation": "Contact information",
+    "updateAddress": "Update your address details",
+    "orderItems": "Order items",
+    "orderCancel": "Cancel Order",
+    "orderActions": "Order actions",
+    "contactSupport": "Contact support",
+    "thankyouPage": "Thank You Page",
+    "orderStatus": "Order Status Page",
+    "toolTipText": "Drag to reorder list items",
+    "footerText": "All Rights Reserved"
   },
   "NotFound": {
     "description": "Check the URL and try again, or use the search bar to find what you need.",

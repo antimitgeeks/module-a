@@ -59,7 +59,7 @@ export default function HomePage() {
    
       const resp = await APIServ.getPartnerInfoData();
       
-      if(resp?.status && resp?.data){
+      if(resp?.status && resp?.result){
         setLoader(false)
         setWelcomeScreen(false)
       }
