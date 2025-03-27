@@ -16,6 +16,8 @@ jobs:
 
           if [[ "$PUSHER" != "$ALLOWED_USER" ]]; then
             echo "❌ Unauthorized push detected! Reverting..."
+            git config --global user.email "antimfulwere@itgeeks.com"
+            git config --global user.name "Antim_Fulwere"
             git reset --hard HEAD~1
             git push origin main --force
             exit 1
