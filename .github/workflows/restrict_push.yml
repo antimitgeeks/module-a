@@ -1,0 +1,22 @@
+name: Restrict Push to Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  enforce-push-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Pusher
+        run: |
+          ALLOWED_USER="antimitgeeks"
+          PUSHER="${{ github.actor }}"
+
+          if [[ "$PUSHER" != "$ALLOWED_USER" ]]; then
+            echo "❌ Unauthorized push by $PUSHER. Blocking..."
+            exit 1
+          else
+            echo "✅ Authorized push by $PUSHER. Proceeding..."
+          fi
