@@ -9,6 +9,9 @@ jobs:
   block-unauthorized-push:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4  # ✅ Clones the repo so Git commands work
+
       - name: Check Pusher
         run: |
           ALLOWED_USER="antimitgeeks"
@@ -16,9 +19,19 @@ jobs:
 
           if [[ "$PUSHER" != "$ALLOWED_USER" ]]; then
             echo "❌ Unauthorized push detected! Reverting..."
+
+            # Configure GitHub Actions bot as the committer
             git config --global user.email "antimfulwere@itgeeks.com"
             git config --global user.name "Antim_Fulwere"
+
+            # Ensure we are on the latest main branch
+            git fetch origin main
+            git checkout main
+
+            # Undo the last commit
             git reset --hard HEAD~1
+
+            # Force push the reverted branch
             git push origin main --force
             exit 1
           else
