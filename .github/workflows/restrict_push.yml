@@ -10,7 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4  # ✅ Clones the repo so Git commands work
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # Ensures at least one previous commit is available
 
       - name: Check Pusher
         run: |
@@ -20,20 +22,24 @@ jobs:
           if [[ "$PUSHER" != "$ALLOWED_USER" ]]; then
             echo "❌ Unauthorized push detected! Reverting..."
 
-            # Configure GitHub Actions bot as the committer
-            git config --global user.email "antimfulwere@itgeeks.com"
-            git config --global user.name "Antim_Fulwere"
+            # Configure GitHub Actions bot for commit operations
+            git config --global user.email "github-actions@github.com"
+            git config --global user.name "GitHub Actions"
 
-            # Ensure we are on the latest main branch
-            git fetch origin main
+            # Ensure we are on the main branch
             git checkout main
 
-            # Undo the last commit
-            git reset --hard HEAD~1
+            # Check if there is a previous commit before attempting reset
+            if git rev-parse HEAD~1 >/dev/null 2>&1; then
+              echo "🔄 Undoing last commit..."
+              git reset --hard HEAD~1
+              git push origin main --force
+              echo "🚨 Unauthorized commit has been reverted!"
+            else
+              echo "⚠️ No previous commit to revert to. Skipping reset."
+            fi
 
-            # Force push the reverted branch
-            git push origin main --force
-            exit 1
+            exit 1  # Fails the workflow to indicate an unauthorized push
           else
             echo "✅ Authorized push by $PUSHER."
           fi
