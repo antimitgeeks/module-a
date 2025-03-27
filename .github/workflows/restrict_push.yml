@@ -1,4 +1,4 @@
-name: Restrict Push to Main
+name: Revert Unauthorized Push
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  enforce-push-policy:
+  block-unauthorized-push:
     runs-on: ubuntu-latest
     steps:
       - name: Check Pusher
@@ -15,8 +15,10 @@ jobs:
           PUSHER="${{ github.actor }}"
 
           if [[ "$PUSHER" != "$ALLOWED_USER" ]]; then
-            echo "❌ Unauthorized push by $PUSHER. Blocking..."
+            echo "❌ Unauthorized push detected! Reverting..."
+            git reset --hard HEAD~1
+            git push origin main --force
             exit 1
           else
-            echo "✅ Authorized push by $PUSHER. Proceeding..."
+            echo "✅ Authorized push by $PUSHER."
           fi
